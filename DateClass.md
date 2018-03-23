@@ -2,7 +2,7 @@
 ********************DateClass*******************
 ***********************************************/
 
-```cpp
+
 /***********************************************
 ******以下为头文件#include"date.h"(声明)********
 ***********************************************/
@@ -144,6 +144,11 @@ bool Date::operator<(const Date& d)
 
 Date Date::operator+(int day)
 {
+	if(day<0)                                 //确保程序的严谨性
+	{
+		return *this-(-day);
+	}
+	
     Date tmp(*this);
     tmp._day += day;
     while (tmp._day >tmp.GetMonthDay(tmp._year, tmp._month))
@@ -192,6 +197,11 @@ Date Date::operator--(int)       //后置--
 
 Date Date::operator-(int day)
 {
+	if(day<0)                        
+	{
+		return *this+(-day);        
+	}
+	
     Date tmp(*this);
     tmp._day -= day;
     while (tmp._day <= 0)
@@ -212,7 +222,7 @@ Date& Date::operator-=(int day)
     return *this;
 }
 
-int Date::operator-(const Date& d)
+int Date::operator-(const Date& d)                      
 {
     int day = 0;
     Date max_date(*this);
@@ -283,5 +293,3 @@ int main()
     system("pause");
     return 0;
 }
-
-```
